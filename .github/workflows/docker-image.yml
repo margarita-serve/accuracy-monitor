@@ -1,0 +1,29 @@
+name: Docker Build Test
+
+on:
+  push:
+    # master branch에 push했을 때 workflow가 돌게 됨
+    branches: [main]
+
+jobs:
+  # job 이름. job은 여러 개가 설정되어 돌아갈 수 있음.
+  image-build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Source Code Checkout
+      uses: actions/checkout@master
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.GIT_PACKAGE_TOKEN }}
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: ghcr.io/${{ github.repository_owner }}/accuracy-monitor:latest

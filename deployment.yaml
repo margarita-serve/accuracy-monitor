@@ -1,0 +1,136 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: koreserve-config
+  namespace: koreserve
+data:
+  MINIO_ENDPOINT: "minio-service:9000"
+  MINIO_ACCESS_ID: "bWluaW9hZG1pbg=="
+  MINIO_ACCESS_KEY: "bWluaW9hZG1pbg=="
+  KSERVE_LOGGERURL: "http://kafka-broker-ingress.knative-eventing.svc.cluster.local/default/kafka-broker"
+  IMAGE_REGISTRY: "192.168.88.155"
+  ELASTICSEARCH_ENDPOINT: "http://elasticsearch-master-headless.elk.svc.cluster.local:9200"
+  KAFKA_BROKER_ENDPOINT: "my-cluster-kafka-plain-bootstrap.kafka.svc.cluster.local:9092"
+  GRAFANA_ENDPOINT: "http://tobs-promscale-connector-np.tobs.svc.cluster.local:9201"
+  DRIFT_MONITOR_ENDPOINT: "http://koreserve-drift-monitor.koreserve.svc.cluster.local:8002"
+  ACCURACY_MONITOR_ENDPOINT: "http://koreserve-accuracy-monitor.koreserve.svc.cluster.local:8003"
+  SERVICE_MONITOR_ENDPOINT: "http://koreserve-servicehealth-monitor.koreserve.svc.cluster.local:8004"
+  KORESERVE_MAIN_REST_API_SERVER_ENDPOINT: "http://koreserve-main-rest-api.koreserve.svc.cluster.local:8080"
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: koreserve-accuracy-monitor
+  namespace: koreserve
+spec:
+  selector:
+    matchLabels:
+      app: koreserve-accuracy-monitor
+  template:
+    metadata:
+      labels:
+        app: koreserve-accuracy-monitor
+    spec:
+      containers:
+        - name: accuracy-api-server
+          image: 192.168.88.155/koreserve/accuracy-monitor:v1.1
+          imagePullPolicy: Always
+          command: [ "/bin/sh" ]
+          args: [ "-c","/app/gunicorn.sh" ]
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "1"
+            limits:
+              memory: "1Gi"
+              cpu: "2"
+          ports:
+            - containerPort: 8003
+          env:
+            - name: KSERVE_API_DEFAULT_STORAGE_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: koreserve-config
+                  key: MINIO_ENDPOINT
+            - name: KSERVE_API_DEFAULT_AWS_ACCESS_KEY_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: koreserve-config
+                  key: MINIO_ACCESS_ID
+            - name: KSERVE_API_DEFAULT_AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: koreserve-config
+                  key: MINIO_ACCESS_KEY
+            - name: KSERVE_API_DEFAULT_KAFKA_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: koreserve-config
+                  key: KAFKA_BROKER_ENDPOINT
+            - name: KSERVE_API_DEFAULT_DATABASE_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: koreserve-config
+                  key: ELASTICSEARCH_ENDPOINT
+        - name: accuracy-monitoring-server
+          image: 192.168.88.155/koreserve/accuracy-monitor:v1.1
+          imagePullPolicy: Always
+          command: ["python", "/app/app/main.py"]
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "1"
+            limits:
+              memory: "1Gi"
+              cpu: "2"
+          ports:
+            - containerPort: 8000
+          env:
+            - name: KSERVE_API_DEFAULT_STORAGE_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: koreserve-config
+                  key: MINIO_ENDPOINT
+            - name: KSERVE_API_DEFAULT_AWS_ACCESS_KEY_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: koreserve-config
+                  key: MINIO_ACCESS_ID
+            - name: KSERVE_API_DEFAULT_AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: koreserve-config
+                  key: MINIO_ACCESS_KEY
+            - name: KSERVE_API_DEFAULT_KAFKA_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: koreserve-config
+                  key: KAFKA_BROKER_ENDPOINT
+            - name: KSERVE_API_DEFAULT_DATABASE_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: koreserve-config
+                  key: ELASTICSEARCH_ENDPOINT
+      serviceAccountName: kserve-api-sa
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: koreserve-accuracy-monitor
+  namespace: koreserve
+spec:
+  selector:
+    app: koreserve-accuracy-monitor
+  ports:
+    - name: http
+      nodePort: 30072
+      port: 8003
+      protocol: TCP
+      targetPort: 8003
+  type: NodePort
+
+
+

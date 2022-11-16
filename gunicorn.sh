@@ -1,0 +1,2 @@
+#!/bin/sh
+gunicorn --chdir app --worker-class gevent --workers 3 --threads 1 --bind 0.0.0.0:8003 main:app --max-requests 10000 --max-requests-jitter 10000 --timeout 300 --keep-alive 10 --log-level debug

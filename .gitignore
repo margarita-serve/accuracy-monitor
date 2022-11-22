@@ -1,6 +1,0 @@
-venv/
-*.pyc
-__pycache__/
-app/temp/
-.DS_Store
-.idea/

@@ -233,6 +233,10 @@ class AccuracyMonitorInit(Resource):
         dataset_path, model_path, inference_name, model_id, target_label, association_id, association_id_in_feature, \
         model_type, framework, drift_metric, drift_measurement, atrisk_value, failing_value = parsing_base_data(args)
 
+        logger.info('-----------------------------------------------')
+        logger.info(inference_name, drift_metric)
+        logger.info('-----------------------------------------------')
+
         positive_class = args.get('positive_class')
         negative_class = args.get('negative_class')
         binary_threshold = args.get('binary_threshold')

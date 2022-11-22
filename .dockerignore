@@ -1,6 +1,0 @@
-Dockerfile
-.git
-.gitignore
-venv
-readme.md
-deployment.yaml

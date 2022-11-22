@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9759a18c-99c8-477b-9771-26f3deac09ec" name="변경" comment="test-commit">
+    <list default="true" id="9759a18c-99c8-477b-9771-26f3deac09ec" name="변경" comment="ignore add">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +53,7 @@
       <workItem from="1668995608149" duration="333000" />
       <workItem from="1669097948170" duration="846000" />
       <workItem from="1669099302945" duration="252000" />
-      <workItem from="1669099561720" duration="966000" />
+      <workItem from="1669099561720" duration="2324000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1668562280434</created>
@@ -75,7 +76,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669099642833</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ignore add">
+      <created>1669100886211</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1669100886211</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,6 +115,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="test-commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="test-commit" />
+    <MESSAGE value="ignore add" />
+    <option name="LAST_COMMIT_MESSAGE" value="ignore add" />
   </component>
 </project>

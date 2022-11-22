@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9759a18c-99c8-477b-9771-26f3deac09ec" name="변경" comment="init">
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+    <list default="true" id="9759a18c-99c8-477b-9771-26f3deac09ec" name="변경" comment="test-commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +52,7 @@
       <workItem from="1668995608149" duration="333000" />
       <workItem from="1669097948170" duration="846000" />
       <workItem from="1669099302945" duration="252000" />
-      <workItem from="1669099561720" duration="65000" />
+      <workItem from="1669099561720" duration="966000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1668562280434</created>
@@ -71,7 +68,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669099428264</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="test-commit">
+      <created>1669099642833</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1669099642833</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -102,6 +106,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="test-commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="test-commit" />
   </component>
 </project>
